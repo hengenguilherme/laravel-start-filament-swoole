@@ -30,7 +30,7 @@ return [
             'path' => env('PUSHER_APP_PATH'),
             'capacity' => null,
             'enable_client_messages' => false,
-            'enable_statistics' => true,
+            'enable_statistics' => false,
         ],
     ],
 
@@ -70,6 +70,7 @@ return [
      */
     'middleware' => [
         'web',
+        'auth',
         Authorize::class,
     ],
 
