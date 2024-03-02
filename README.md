@@ -37,12 +37,37 @@ sail artisan key:generate
 sail artisan migrate
 ```
 
-### Seed database
-````bash
-sail artisan db:seed
-````
+### Run the shield seeder
+```bash
+sail artisan db:seed --class=ShieldSeeder
+```
+
+### Create the panel-user
+```bash
+sail artisan make:filament-user
+```
+
+### Make the super-admin
+Get the user id and run the command ```sail artisan shield:super-admin --user=<user_id>```
+```bash
+sail artisan shield:super-admin --user=1
+```
 
 ### Restart application
 ```bash
 sail restart
 ```
+
+### Install npm dependencies
+```bash
+sail npm install
+```
+
+### Build the front end scripts
+```bash
+sail npm run build
+```
+
+### Test the websocket server
+
+After logging in, open the browser console and call the /testEvent route. Then, observe in the console that there should be a {ping: true}.
