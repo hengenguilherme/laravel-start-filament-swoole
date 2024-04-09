@@ -27,6 +27,7 @@ class AppPanelProvider extends PanelProvider
             ->id('app')
             ->spa()
             ->maxContentWidth('full')
+            ->sidebarCollapsibleOnDesktop()
             ->path('app')
             ->login()
             ->colors([
