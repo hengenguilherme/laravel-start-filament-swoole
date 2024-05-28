@@ -24,7 +24,7 @@ class AppServiceProvider extends ServiceProvider
 
         require base_path('routes/channels.php');
         FilamentAsset::register([
-            Js::make('app', __DIR__ . '/../../resources/js/app.ts')
+            Js::make('app', __DIR__.'/../../resources/js/app.ts'),
         ]);
     }
 }

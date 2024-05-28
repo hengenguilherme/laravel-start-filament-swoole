@@ -26,20 +26,22 @@ class FrontResource extends Command
      */
     public function handle()
     {
-        $modelClass = "\\App\\Models\\" . $this->argument('model');
-        if (!class_exists($modelClass)) {
+        $modelClass = '\\App\\Models\\'.$this->argument('model');
+        if (! class_exists($modelClass)) {
             $this->info('place the model class');
+
             return;
         }
-        /**@var Model $model */
+        /** @var Model $model */
         $model = app($modelClass);
         $tablename = $model->getTable();
         $stubDirectory = 'stubs/front-end/boilerplate-page';
         $dir = new \DirectoryIterator($stubDirectory);
         $resourcePageDir = 'resources/js/pages/';
-        $resourceDirname = $resourcePageDir . $tablename;
+        $resourceDirname = $resourcePageDir.$tablename;
         if (file_exists($resourceDirname)) {
-            $this->info('directory ' . $resourceDirname . ' already exists!');
+            $this->info('directory '.$resourceDirname.' already exists!');
+
             return;
         }
         mkdir($resourceDirname, recursive: true);
@@ -56,13 +58,13 @@ class FrontResource extends Command
             }
         }
 
-        $indexToImportFiles = file_get_contents($resourcePageDir . '/index.ts');
+        $indexToImportFiles = file_get_contents($resourcePageDir.'/index.ts');
         $strReplaced = preg_replace(
             ["/(\nexport)/m", "/,\n(})/"],
             ["import * as $tablename from './$tablename';\n$1", ",\n    $tablename,\n$1"],
             $indexToImportFiles
         );
 
-        file_put_contents($resourcePageDir . '/index.ts', $strReplaced);
+        file_put_contents($resourcePageDir.'/index.ts', $strReplaced);
     }
 }
